@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "hikari.leak-detection-threshold",
+      "type": "java.lang.String",
+      "description": "Description for hikari.leak-detection-threshold."
+  }
+] }
