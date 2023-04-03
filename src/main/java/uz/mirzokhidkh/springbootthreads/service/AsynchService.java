@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface AsynchService {
 
-    public void executeAsynchronously(Integer balance);
+    void executeAsynchronously(Integer balance);
 }

@@ -1,6 +1,9 @@
 package uz.mirzokhidkh.springbootthreads.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.*;
 import uz.mirzokhidkh.springbootthreads.domain.Client;
 import uz.mirzokhidkh.springbootthreads.payload.ApiResponse;
@@ -9,6 +12,7 @@ import uz.mirzokhidkh.springbootthreads.payload.ClientDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientStateDTO;
 import uz.mirzokhidkh.springbootthreads.service.AsynchService;
 import uz.mirzokhidkh.springbootthreads.service.ClientService;
+import uz.mirzokhidkh.springbootthreads.util.Util;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -21,7 +25,8 @@ public class ClientController {
     private final ClientService clientService;
     private final AsynchService asynchService;
 
-    public ClientController(ClientService clientService, AsynchService asynchService) {
+    public ClientController(ClientService clientService,
+                            AsynchService asynchService) {
         this.clientService = clientService;
         this.asynchService = asynchService;
     }
@@ -71,6 +76,10 @@ public class ClientController {
         Instant start = Instant.now();
 
         asynchService.executeAsynchronously(balance);
+
+//        Util.getStatisticForEachThread();
+//        System.out.println("Total tasks : " + Util.getSum());
+
         long toMillis = Duration.between(start, Instant.now()).toMillis();
         System.out.println("Total time: " + toMillis);
 

@@ -17,9 +17,11 @@ public class ThreadConfig {
 
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(1);
+//        executor.setCorePoolSize(20);
         executor.setMaxPoolSize(30);
-        executor.setThreadNamePrefix("mkh-");
+        executor.setThreadNamePrefix("mkh-pool-");
         executor.setWaitForTasksToCompleteOnShutdown ( true ) ;
+//        executor.setAwaitTerminationSeconds (7) ;
         executor.initialize();
 
         return executor;

@@ -41,12 +41,12 @@ public class AsynchServiceImpl implements AsynchService {
 //        List<List<Integer>> lists = Lists.partition(allIDs, 500);
 
         allIDs.forEach(id -> {
-
             ClientBalanceDTO clientBalanceDTO = new ClientBalanceDTO(id, balance);
             MyRunnableTask task = new MyRunnableTask(clientBalanceDTO, clientService);
-
             taskExecutor.execute(task);
         });
+
+
 
 //        MyRunnableTask myRunnableTask = appContext/**/.getBean(MyRunnableTask.class);
 
