@@ -7,26 +7,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+//import javax.persistence.Column;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientDTO {
 
-    @Column()
+//    @Column()
     private String name;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String address;
 
-    @Column()
+//    @Column()
     private Integer balance;
 
-    @Column()
+//    @Column()
     private Integer state;
 
-    @Column()
+//    @Column()
     @Schema(defaultValue = "N")
     private String active = "N";
 

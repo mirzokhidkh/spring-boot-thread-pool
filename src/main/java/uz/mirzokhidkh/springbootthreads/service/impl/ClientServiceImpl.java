@@ -7,34 +7,80 @@ import uz.mirzokhidkh.springbootthreads.payload.ApiResponse;
 import uz.mirzokhidkh.springbootthreads.payload.ClientBalanceDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientStateDTO;
-import uz.mirzokhidkh.springbootthreads.repository.ClientRepository;
+//import uz.mirzokhidkh.springbootthreads.repository.ClientRepository;
 import uz.mirzokhidkh.springbootthreads.service.ClientService;
 
 import javax.sql.DataSource;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Types;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
     private final DataSource dataSource;
-    private final ClientRepository clientRepository;
+//    private final ClientRepository clientRepository;
 
-    public ClientServiceImpl(DataSource dataSource, ClientRepository clientRepository) {
+    public ClientServiceImpl(DataSource dataSource
+    ) {
         this.dataSource = dataSource;
-        this.clientRepository = clientRepository;
     }
 
     @Override
     public List<Client> getAllClients() {
-        return clientRepository.getAllClients();
+        List<Client> clients = new ArrayList<>();
+        ;
+        String QUERY = "select t.* from clients_info_v t FETCH FIRST 100000 ROWS ONLY";
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()
+        ) {
+            ResultSet rs = stmt.executeQuery(QUERY);
+            Client client = new Client();
+            while (rs.next()) {
+                client.setId(rs.getInt("id"));
+                client.setName(rs.getString("name"));
+                client.setAddress(rs.getString("address"));
+                client.setBalance(rs.getInt("balance"));
+                client.setState(rs.getInt("state"));
+                client.setActive(rs.getString("active"));
+                client.setLastModified(rs.getTimestamp("last_modified"));
+                clients.add(client);
+            }
+
+            return clients;
+        } catch (
+                SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+//        return clientRepository.getAllClients();
     }
 
     @Override
     public ApiResponse getClientById(Integer id) {
-        Client client = clientRepository.findById(id).orElse(null);
+//        Client client = clientRepository.findById(id).orElse(null);
+        Client client = new Client();
+        String QUERY = "select t.* from clients_info_v t where t.id = " + id;
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()
+        ) {
+            ResultSet rs = stmt.executeQuery(QUERY);
+            while (rs.next()) {
+                client.setId(rs.getInt("id"));
+                client.setName(rs.getString("name"));
+                client.setAddress(rs.getString("address"));
+                client.setBalance(rs.getInt("balance"));
+                client.setState(rs.getInt("state"));
+                client.setActive(rs.getString("active"));
+                client.setLastModified(rs.getTimestamp("last_modified"));
+            }
+            rs.close();
+
+        } catch (
+                SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
         ApiResponse apiResponse;
         if (client == null) {
             apiResponse = new ApiResponse("Client ID '" + id + "' not found");
@@ -147,7 +193,22 @@ public class ClientServiceImpl implements ClientService {
 
 
     public List<Integer> getAllIntegers() {
-        return clientRepository.findAllIntegers();
+        List<Integer> integers = new ArrayList<>();
+        String QUERY = "select t.* from clients_info_v t";
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()
+        ) {
+            ResultSet rs = stmt.executeQuery(QUERY);
+            while (rs.next()) {
+                integers.add(rs.getInt("id"));
+            }
+
+            return integers;
+        } catch (
+                SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+//        return clientRepository.findAllIntegers();
     }
 
 }

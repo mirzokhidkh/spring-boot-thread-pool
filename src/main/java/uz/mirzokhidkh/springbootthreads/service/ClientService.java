@@ -6,11 +6,12 @@ import uz.mirzokhidkh.springbootthreads.payload.ClientBalanceDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientStateDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ClientService {
 
-    List<Client> getAllClients();
+    List<Client> getAllClients() throws SQLException;
 
     ApiResponse getClientById(Integer id);
 

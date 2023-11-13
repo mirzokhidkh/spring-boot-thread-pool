@@ -16,7 +16,7 @@ public class ThreadConfig {
     public TaskExecutor threadPoolTaskExecutor() {
 
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(1);
+        executor.setCorePoolSize(3);
 //        executor.setCorePoolSize(20);
         executor.setMaxPoolSize(30);
         executor.setThreadNamePrefix("mkh-pool-");

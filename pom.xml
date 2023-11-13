@@ -15,19 +15,19 @@
 	<description>spring-boot-threads</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<localRepositoryUrl>http://10.50.50.145:9999/releases</localRepositoryUrl>
+<!--		<localRepositoryUrl>http://10.50.50.145:9999/releases</localRepositoryUrl>-->
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>fidoRepository</id>
-			<url>${localRepositoryUrl}</url>
-		</repository>
-		<repository>
-			<id>centralRepository</id>
-			<url>https://mvnrepository.com/artifact</url>
-		</repository>
-	</repositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>fidoRepository</id>-->
+<!--			<url>${localRepositoryUrl}</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>centralRepository</id>-->
+<!--			<url>https://mvnrepository.com/artifact</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 
 	<dependencies>
 		<dependency>
@@ -37,6 +37,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
 		<dependency>
@@ -51,8 +56,25 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-data-jdbc</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework</groupId>-->
+<!--			<artifactId>spring-orm</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.hibernate</groupId>-->
+<!--			<artifactId>hibernate-entitymanager</artifactId>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -86,9 +108,6 @@
 			<artifactId>guava</artifactId>
 			<version>31.1-jre</version>
 		</dependency>
-
-
-
 	</dependencies>
 
 	<build>

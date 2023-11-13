@@ -14,6 +14,7 @@ import uz.mirzokhidkh.springbootthreads.service.AsynchService;
 import uz.mirzokhidkh.springbootthreads.service.ClientService;
 import uz.mirzokhidkh.springbootthreads.util.Util;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ClientController {
 
 
     @GetMapping("/clients")
-    public List<Client> getAllClients() {
+    public List<Client> getAllClients() throws SQLException {
         long s = System.currentTimeMillis();
         List<Client> aLlClients = clientService.getAllClients();
         System.out.println((System.currentTimeMillis() - s)/1000);

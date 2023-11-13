@@ -1,0 +1,844 @@
+{
+    "contract": {
+        "accCurrCode1": "860",
+        "accCurrCode2": "860",
+        "agreements": [
+            {
+                "accCurrCode1": "860",
+                "accCurrCode2": "860",
+                "agrmSubject": "\u0418\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u0435 \u0441\u043f\u0435\u0446\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u0438 \u0443\u0441\u043b\u043e\u0432\u0438\u0439 \u043a\u043e\u043d\u0442\u0440\u0430\u043a\u0442\u0430",
+                "amount1": 1000,
+                "amount2": 1000,
+                "bankForAddress": "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d",
+                "bankForAttributes": "\u0420/\u0421:KZ516010151000230954 \u0411\u0418\u041aHSBKKZKX Cor.ac.:\u21168900372605 SWIFT BIC:IRVTUS3NXXX",
+                "bankForCountryCode": "398",
+                "bankForName": "\u0410\u041e \"\u041d\u0430\u0440\u043e\u0434\u043d\u044b\u0439 \u0411\u0430\u043d\u043a \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0430\"",
+                "cntrSubject": 1,
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "contractorForAddress": "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d, \u0412\u043e\u0441\u0442\u043e\u0447\u043d\u043e-\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0441\u043a\u0430\u044f \u043e\u0431\u043b., \u0423\u0441\u0442\u044c-\u041a\u0430\u043c\u0435\u043d\u043e\u0433\u043e\u0440\u0441\u043a, \u0421\u0430\u043c\u0430\u0440\u0441\u043a\u043e\u0435 \u0448\u043e\u0441\u0441\u0435, 17",
+                "contractorForCountryCode": "398",
+                "contractorForName": "\u0422\u041e\u041e \"Sercan Investment Group\"",
+                "contractorUzAddress": "\u0420\u0423\u0437, \u0422\u0430\u0448\u043a\u0435\u043d\u0442\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c , \u0431\u0443\u043a\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d, \u0443\u043b. \u0423\u0437\u0431\u0435\u043a\u0438\u0441\u0442\u043e\u043d, \u0434\u043e\u043c 3",
+                "contractorUzName": "\u041e\u041e\u041e \"Adler Group Distibution\"",
+                "creditRate": 1,
+                "cstDate": "2019-02-12",
+                "currCode1": "860",
+                "currCode2": "860",
+                "docDate": "2019-02-12",
+                "docNo": "1",
+                "execDate": "2019-02-12",
+                "execType": 2,
+                "industrialZoneCode": 3,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "mvesDate": "2019-02-12",
+                "productsName": "\u0444\u043b\u0430\u043d\u0446\u0435\u0432\u0430\u044f \u0437\u0430\u0433\u043b\u0443\u0448\u043a\u0430 \u0434\u043b\u044f \u043c\u0430\u0433\u0438\u0441\u0442\u0440\u0430\u043b\u044c\u043d\u044b\u0445 \u0442\u0440\u0443\u0431\u043e\u043f\u0440\u043e\u0432\u043e\u0434",
+                "rgnCode": "01",
+                "serialNo": 1,
+                "status": 0
+            }
+        ],
+        "amount1": 1000,
+        "amount2": 1000,
+        "bankForAddress": "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d",
+        "bankForAttributes": "\u0420/\u0421:KZ516010151000230954 \u0411\u0418\u041aHSBKKZKX Cor.ac.:\u21168900372605 SWIFT BIC:IRVTUS3NXXX",
+        "bankForCountryCode": "398",
+        "bankForName": "\u0410\u041e \"\u041d\u0430\u0440\u043e\u0434\u043d\u044b\u0439 \u0411\u0430\u043d\u043a \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0430\"",
+        "bankId": "00898",
+        "barterTerms": [
+            {
+                "agrmNo": "1",
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "exportDeadline": "2019-02-12",
+                "exportTerm": 10,
+                "importTerm": 10,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "paymentMethod": "06",
+                "paymentTerm": 10,
+                "status": 0
+            }
+        ],
+        "centralBankLetterDate": "2015-03-06",
+        "centralBankLetterNo": "222",
+        "cntrStatus": 0,
+        "cntrSubject": 1,
+        "cntrType": "02",
+        "commissions": [
+            {
+                "amount": 1000,
+                "fundSerialNo": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "paymentSerialNo": 1,
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "compensations": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "policyNo": "14/00/00-1905-02",
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "contractorForAddress": "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d, \u0412\u043e\u0441\u0442\u043e\u0447\u043d\u043e-\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0441\u043a\u0430\u044f \u043e\u0431\u043b., \u0423\u0441\u0442\u044c-\u041a\u0430\u043c\u0435\u043d\u043e\u0433\u043e\u0440\u0441\u043a, \u0421\u0430\u043c\u0430\u0440\u0441\u043a\u043e\u0435 \u0448\u043e\u0441\u0441\u0435, 17",
+        "contractorForCountryCode": "398",
+        "contractorForName": "\u0422\u041e\u041e \"Sercan Investment Group\"",
+        "contractorUzAddress": "27",
+        "contractorUzInn": "202328794",
+        "contractorUzName": "GAMMA COLOR SERVICE OOO",
+        "contractorUzParentCompany": "\u0412\u044b\u0448\u0435\u0441\u0442\u043e\u044f\u0449\u0430\u044f \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u044f \u043e\u0442\u0441\u0443\u0442\u0441\u0432\u0443\u0435\u0442",
+        "contractorUzPhone": "998722210406",
+        "creditRate": 1,
+        "cstDate": "2015-03-06",
+        "currCode1": "860",
+        "currCode2": "860",
+        "declarations": [
+            {
+                "g1": "\u042d\u041a10",
+                "g15": "840",
+                "g17": "840",
+                "g22a": "840",
+                "g22b": 1000,
+                "g23": 9446.65,
+                "g24a": "21",
+                "g2name": "\u041e\u041e\u041e \"\u0412\u043e\u0434\u0438\u0439 \u041f\u0430\u0445\u0442\u0430\u0441\u0438\"",
+                "g7a": "03015",
+                "g7b": "2015-03-06",
+                "g7c": "0008999",
+                "g8name": "\u041e\u041e\u041e \u041f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0441\u0442\u0432\u0435\u043d\u043d\u043e-\u043a\u043e\u043c\u043c\u0435\u0440\u0447\u0435\u0441\u043a\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0412\u0418\u0412\u0410",
+                "g9name": "\u041e\u041e\u041e \"\u0412\u043e\u0434\u0438\u0439 \u041f\u0430\u0445\u0442\u0430\u0441\u0438\"",
+                "gc3date": "2015-03-06",
+                "gdvipdate": "2015-03-06",
+                "goods": [
+                    {
+                        "g31amount": 30,
+                        "g31name": "1)\u0412\u0430\u0442\u0430 \u0445\u043b\u043e\u043f\u0447\u0430\u0442\u043e\u0431\u0443\u043c\u0430\u0436\u043d\u0430\u044f \u0447\u0435\u0441\u0430\u043d\u0430\u044f \"\u041b\u044e\u043a\u0441\", O'zDSt 1029:2003, \u0432 \u043a\u0438\u043f\u0430\u0445 -  \u0432\u0435\u0441: 20306 \u043a\u0433, ; 2)99 \u043a\u0438\u043f\u043e\u0432;",
+                        "g32": 1,
+                        "g33": "3204110000",
+                        "g37b": "00",
+                        "g37c": "000",
+                        "g38": 4400,
+                        "g41": "166",
+                        "g42": 1000
+                    }
+                ]
+            }
+        ],
+        "delegates": [
+            {
+                "agrmNo": "1",
+                "courtDscnDate": "2017-11-06",
+                "courtDscnNo": "2017/11-00",
+                "courtName": "\u0412\u0435\u0440\u0445\u043e\u0432\u043d\u044b\u0439 \u0441\u0443\u0434 \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u0423\u0437\u0431\u0435\u043a\u0438\u0441\u0442\u0430\u043d",
+                "dstAddress": "\u0422\u0430\u0448. \u043e\u0431\u043b. \u042e\u043a\u043e\u0440\u0438. \u0427\u0438\u0440\u0447\u0438\u043a. \u041f\u043e\u0441. \u0418\u0418\u041a \u041e\u0442\u0430 \u041c\u0430\u0448\u0438\u043d\u043e \u0442\u0440\u0430\u043a\u0442",
+                "dstBankConfirmationFlag": 1,
+                "dstBankId": "01061",
+                "dstBankInn": "201589828",
+                "dstBankUserName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418.",
+                "dstIndustrialZoneCode": 3,
+                "dstInn": "200837914",
+                "dstName": "\u0410\u0433\u0440\u043e\u0444\u0438\u0440\u043c\u0430 \"DOLINA AGRO TRANZIT\"",
+                "dstOkonx": "71122",
+                "dstOkpo": "26825672",
+                "dstPhone": "712072772",
+                "dstRgnCode": "30",
+                "govDscnDate": "2017-11-06",
+                "govDscnNo": "\u041f\u041f-4388",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "newIdn": "207179114204743049190200005",
+                "oldIdn": "207179114204743049190200005",
+                "parentCompanyCode": "\u0425\u043e\u043a\u0438\u043c\u0438\u044f\u0442 \u0433.\u0422\u0430\u0448\u043a\u0435\u043d\u0442\u0430",
+                "reasonType": 1,
+                "remark": "\u0414\u043e\u043f.\u0421\u043e\u0433\u043b.\u2116 2 \u043e\u0442 20.04.2017\u0433.",
+                "serialNo": 1,
+                "srcBankConfirmationFlag": 1,
+                "srcBankUserName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418.",
+                "status": 0
+            }
+        ],
+        "deliveryTerms": [
+            {
+                "agrmNo": "1",
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "destination": "\u042f\u043d\u0433\u0438\u044e\u043b\u044c, \u0423\u0437\u0431\u0435\u043a\u0438\u0441\u0442\u0430\u043d",
+                "incotermsCode": "02",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0
+            }
+        ],
+        "docDate": "2015-03-06",
+        "docNo": "EX-41/2016",
+        "endContract": {
+            "docDate": "2019-02-12",
+            "insTime": "2020-06-04T04:33:06.417Z",
+            "remark": "\u0432 \u0441\u0432\u044f\u0437\u0438 \u0441 \u043e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435\u043c \u0437\u0430\u0434\u043e\u043b\u0436\u0435\u043d\u043d\u043e\u0441\u0442\u0438",
+            "status": 0
+        },
+        "exchangePayments": [
+            {
+                "amountSoum": 1000,
+                "docDate": "2019-02-12",
+                "docNo": "391",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "execDate": "2019-02-12",
+        "execType": 2,
+        "exportTerms": [
+            {
+                "agrmNo": "1",
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "deadlineType": 1,
+                "exportDeadline": "2019-02-12",
+                "exportTerm": 120,
+                "exportType": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "leasingDeadline": 3,
+                "leasingRate": 1,
+                "paymentDeadline": "2019-02-12",
+                "paymentTerm": 120,
+                "status": 0
+            }
+        ],
+        "financeInfos": [
+            {
+                "agrmNo": "1",
+                "bankForAddress": "430 North Beverwyck Road Parsippany, NJ 07054",
+                "bankForAttributes": "4308134115SWIFT NUMBER:NRTHUS33XXX",
+                "bankForCountryCode": "840",
+                "bankForName": "TD BANK N.A.",
+                "companyForAddress": "11 Peace Valley Rd, Towaco, New Jersey,07082 USA",
+                "companyForCountryCode": "860",
+                "companyForName": "\"THE ALPINE COMMERCE GROUP LLC\"",
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0
+            }
+        ],
+        "funds": [
+            {
+                "amount": 1000,
+                "conditionType": 1,
+                "currCode": "860",
+                "currRate": 1.0419,
+                "docDate": "2019-02-12",
+                "docNo": "49100165264213",
+                "goodsAmount1": 1000,
+                "goodsAmount2": 1000,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "rateType": 0,
+                "serialNo": 1,
+                "serviceAmount1": 1000,
+                "serviceAmount2": 1000,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "govDcsnDate": "2015-03-06",
+        "govDcsnNo": "\u041f\u041f-2313",
+        "guarantees": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docNo": "GC1783916002896",
+                "docStartDate": "2019-02-12",
+                "docValDate": "2019-02-12",
+                "docValDays": 120,
+                "guaranteeSumChanges": [
+                    {
+                        "amount": 1000,
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "newAmount": 1000,
+                        "reasonType": 4,
+                        "serialNo": 1,
+                        "status": 0,
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "guaranteeTimeChanges": [
+                    {
+                        "docValDate": "2019-02-12",
+                        "docValDays": 120,
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "newDocValDate": "2019-02-12",
+                        "newDocValDays": 150,
+                        "reasonType": 4,
+                        "serialNo": 1,
+                        "status": 0,
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "idn": "207179114204743049190200005",
+        "importTerms": [
+            {
+                "agrmNo": "1",
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "importDeadline": "2019-02-12",
+                "importTerm": 30,
+                "importTermAfterAccr": 90,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "paymentDeadline": "2019-02-12",
+                "paymentMethod": "04",
+                "paymentTerm": 5,
+                "status": 0
+            }
+        ],
+        "industrialZoneCode": 3,
+        "insTime": "2020-06-04T04:33:06.417Z",
+        "internalShipments": [
+            {
+                "amount": 1000,
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "docName": "\u0421\u0447\u0435\u0442 \u0444\u0430\u043a\u0442\u0443\u0440\u0430 \u2116112 \u043e\u0442 23/11/2016\u0433.",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0
+            }
+        ],
+        "leasePayments": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "leasingFlag": 1,
+        "lettersOfCredit": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docNo": "459210918111304",
+                "docStartDate": "2019-02-12",
+                "docValDays": 120,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "letterOfCreditSumChanges": [
+                    {
+                        "amount": 1000,
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "newAmount": 1000,
+                        "reasonType": 4,
+                        "serialNo": 1,
+                        "status": 0,
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "letterOfCreditTimeChanges": [
+                    {
+                        "docValDays": 120,
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "newDocValDays": 150,
+                        "reasonType": 4,
+                        "serialNo": 1,
+                        "status": 0,
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "lockDate": "2015-03-06",
+        "movesFromEx": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "currRate": 1.0419,
+                "docDate": "2019-02-12",
+                "goodsAmount1": 1000,
+                "goodsAmount2": 1000,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "rateType": 0,
+                "serialNo": 1,
+                "serviceAmount1": 1000,
+                "serviceAmount2": 1000,
+                "sourceIdn": "207179114204743049190200005",
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "movesFromIm": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "currRate": 1.0419,
+                "docDate": "2019-02-12",
+                "goodsAmount1": 1000,
+                "goodsAmount2": 1000,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "rateType": 0,
+                "serialNo": 1,
+                "serviceAmount1": 1000,
+                "serviceAmount2": 1000,
+                "sourceIdn": "207179114204743049190200005",
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "movesToEx": [
+            {
+                "destinationIdn": "207179114204743049190200005",
+                "docDate": "2019-02-12",
+                "fundSerialNo": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "sourceAmount": 1000,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "movesToIm": [
+            {
+                "destinationIdn": "207179114204743049190200005",
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "paymentSerialNo": 1,
+                "serialNo": 1,
+                "sourceAmount": 1000,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "mvesDate": "2016-10-24",
+        "mvesNo": "26600702",
+        "okonx": "20.30.0",
+        "okpo": "02906897",
+        "oldIdn": "207179114204743049190200005",
+        "payableDrops": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "reasonType": 4,
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "payableOverdue1": 1000,
+        "payableOverdue2": 1000,
+        "payableTotal1": 1000,
+        "payableTotal2": 1000,
+        "paymentRefs": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "docNo": "00873/13.10.16/00002",
+                "docValDate": "2019-02-12",
+                "fundSerialNo": 1,
+                "guaranteeNo": "GC1783916002896",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "letterOfCreditNo": "459210918111304",
+                "moveFromExSerialNo": 1,
+                "paymentRefSumChanges": [
+                    {
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "mainBranchUserName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418.",
+                        "newAmount": 1000,
+                        "reason": "\u0421\u043e\u0433\u043b\u0430\u0441\u043d\u043e \u0434\u043e\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044e \u0430\u043a\u043a\u0440\u0435\u0434\u0438\u0442\u0438\u0432\u0430 \u211601 \u043e\u0442 10.10.2017\u0433",
+                        "serialNo": 1,
+                        "status": 0,
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "policyNo": "14/00/00-1905-02",
+                "reasonType": 1,
+                "status": 0,
+                "unusedAmount": 1000,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "payments": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "currRate": 1.0419,
+                "docDate": "2019-02-12",
+                "docNo": "6210YSP000000014",
+                "fundSourceType": 1,
+                "goodsAmount1": 1000,
+                "goodsAmount2": 1000,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "rateType": 0,
+                "serialNo": 1,
+                "serviceAmount1": 1000,
+                "serviceAmount2": 1000,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "penalties": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "penaltyType": 1,
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "performedServices": [
+            {
+                "amount1": 1000,
+                "amount2": 1000,
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "currCode1": "860",
+                "currCode2": "860",
+                "docDate": "2019-02-12",
+                "docNo": "479657",
+                "imExFlag": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "status": 0
+            }
+        ],
+        "policies": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "docNo": "14/00/00-1905-02",
+                "docValDate": "2019-02-12",
+                "docValDays": 120,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "policySumChanges": [
+                    {
+                        "amount": 1000,
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "newAmount": 1000,
+                        "reasonType": 4,
+                        "serialNo": 1,
+                        "status": 0,
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "policyTimeChanges": [
+                    {
+                        "docValDate": "2019-02-12",
+                        "docValDays": 120,
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "newDocValDate": "2019-02-12",
+                        "newDocValDays": 150,
+                        "reasonType": 4,
+                        "serialNo": 1,
+                        "status": 0,
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "productsName": "\u0444\u043b\u0430\u043d\u0446\u0435\u0432\u0430\u044f \u0437\u0430\u0433\u043b\u0443\u0448\u043a\u0430 \u0434\u043b\u044f \u043c\u0430\u0433\u0438\u0441\u0442\u0440\u0430\u043b\u044c\u043d\u044b\u0445 \u0442\u0440\u0443\u0431\u043e\u043f\u0440\u043e\u0432\u043e\u0434",
+        "receivableDrops": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "reasonType": 1,
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "receivableInfos": [
+            {
+                "customsMode": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "remark": "string",
+                "serialNo": 1,
+                "status": 0,
+                "tempImpAmount": 1000,
+                "tempImpCurrCode": "860",
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "receivableOverdue1": 1000,
+        "receivableOverdue2": 1000,
+        "receivableTotal1": 1000,
+        "receivableTotal2": 1000,
+        "reestrRegNo": "0810016",
+        "refundsExp": [
+            {
+                "amount": 1000,
+                "docDate": "2019-02-12",
+                "docNo": "49100175948765",
+                "fundSerialNo": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "moveFromExSerialNo": 1,
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "refundsImp": [
+            {
+                "amount": 1000,
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "docNo": "49100175948765",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "rgnCode": "27",
+        "sales": [
+            {
+                "amount": 1000,
+                "benefitsInfoCode": 5,
+                "compensationSerialNo": 1,
+                "docDate": "2019-02-12",
+                "fundSerialNo": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "moveFromExSerialNo": 1,
+                "saleType": 3,
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "softwareName": "\u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0435 \u043e\u0431\u0435\u0441\u043f\u0435\u0447\u0435\u043d\u0438\u0435",
+        "specifications": [
+            {
+                "agrmNo": "1",
+                "amount": 1000,
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "cstDate": "2019-02-12",
+                "currCode": "860",
+                "docDate": "2019-02-12",
+                "docNo": "1",
+                "docType": 0,
+                "fare": {
+                    "amount": 1000,
+                    "currCode": "860",
+                    "insTime": "2020-06-04T04:33:06.417Z",
+                    "status": 0
+                },
+                "goods": [
+                    {
+                        "amount": 1000,
+                        "brandName": "\u041e\u041e\u041e \"\u0410\u0413\u0420\u041e\u041f\u0420\u041e\u0414\u042d\u041a\u0421\u041f\u041e\u0420\u0422\"",
+                        "cost": 1000,
+                        "currCode": "860",
+                        "goodsType": 40,
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "itemsName": "\u041a\u0430\u0440\u0442\u043e\u0444\u0435\u043b\u044c \u043f\u0440\u043e\u0434\u043e\u0432\u043e\u043b\u044c\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439",
+                        "originCountryCode": "804",
+                        "quantity": 50,
+                        "receiverCountryCode": "860",
+                        "receiverName": "\u041e\u041e\u041e \"PARUS IDEAL\"",
+                        "selfMadeFlag": 1,
+                        "senderCountryCode": "840",
+                        "senderName": "\u041e\u041e\u041e \"\u0422\u0435\u0445\u043d\u043e\u043c\u043e\u043b\u043f\u0440\u043e\u043c\"",
+                        "serialNo": 1,
+                        "status": 0,
+                        "tnCode": "0101210000",
+                        "unitCode": "796",
+                        "warranty": "\u0437\u0430\u043c\u0435\u043d\u0430 \u0434\u0435\u0444\u0435\u043a\u0442\u043d\u044b\u0445 \u0447\u0430\u0441\u0442\u0435\u0439 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e"
+                    }
+                ],
+                "imExFlag": 1,
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "oldNo": "1",
+                "serialNo": 1,
+                "services": [
+                    {
+                        "amount": 1000,
+                        "currCode": "860",
+                        "executionCountryCode": "860",
+                        "executorCountryCode": "860",
+                        "executorName": "\u0427\u041f \"SAIF-OPTIMA\"",
+                        "insTime": "2020-06-04T04:33:06.417Z",
+                        "selfMadeFlag": 1,
+                        "serviceName": "\u041f\u0435\u0440\u0435\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0437\u0435\u0440\u043d\u0430 \u0432 \u043c\u0443\u043a\u0443",
+                        "serviceType": "12",
+                        "status": 0
+                    }
+                ],
+                "status": 0
+            }
+        ],
+        "status": 0,
+        "taxAgencyPenalties": [
+            {
+                "amountSoum": 1000,
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "taxes": [
+            {
+                "amount": 1000,
+                "countryCode": "840",
+                "currCode": "840",
+                "docDate": "2019-02-12",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "serialNo": 1,
+                "status": 0,
+                "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+            }
+        ],
+        "tollingTerms": [
+            {
+                "confirmations": [
+                    {
+                        "actionType": 1,
+                        "confirm": 0,
+                        "date": "2020-06-04T04:33:06.417Z",
+                        "orgType": 1,
+                        "reason": "\u0432\u0432\u0435\u0434\u0435\u043d \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435",
+                        "userName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418."
+                    }
+                ],
+                "currCode": "860",
+                "currRate1": 1.09,
+                "currRate2": 1.09,
+                "docDate": "2019-02-12",
+                "goodsAmount": 1000,
+                "goodsTitle": "string",
+                "idCol": "string",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "rateType1": 0,
+                "rateType2": 0,
+                "serialNo": 1,
+                "serviceAmount1": 1000,
+                "serviceAmount2": 1000,
+                "status": 0
+            }
+        ],
+        "transfers": [
+            {
+                "agrmNo": "1",
+                "dstBankConfirmationFlag": 1,
+                "dstBankId": "01061",
+                "dstBankInn": "201589828",
+                "dstBankUserName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418.",
+                "dstExchInn": "201589828",
+                "dstExchName": "string",
+                "insTime": "2020-06-04T04:33:06.417Z",
+                "newIdn": "207179114204743049190200005",
+                "oldIdn": "207179114204743049190200005",
+                "remark": "\u0414\u043e\u043f.\u0421\u043e\u0433\u043b.\u2116 2 \u043e\u0442 20.04.2017\u0433.",
+                "serialNo": 1,
+                "srcBankConfirmationFlag": 1,
+                "srcBankUserName": "\u0418\u0432\u0430\u043d\u043e\u0432 \u0418.\u0418.",
+                "status": 0,
+                "transferType": 1
+            }
+        ]
+    },
+    "errorMsg": "OK",
+    "gtkId": 15021918,
+    "status": 0,
+    "timeStamp": "2020-04-14T04:52:52.221+0000"
+}

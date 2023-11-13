@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+//import javax.persistence.Column;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientStateDTO {
 
-    @Column()
+//    @Column()
     private Integer id;
 
-    @Column()
+//    @Column()
     private Integer state;
 
 }
