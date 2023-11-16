@@ -9,7 +9,7 @@
 //import java.util.Optional;
 //
 //@Repository
-//public interface ClientRepository extends JpaRepository<Client,Integer> {
+//public interface Client2Repository extends JpaRepository<Client,Integer> {
 ////public interface ClientRepository extends CrudRepository<Client,Integer> {
 //
 ////    @Query(value = "select * from clients_info", nativeQuery = true)

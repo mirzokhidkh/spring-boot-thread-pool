@@ -15,7 +15,7 @@ public class NewOrganization {
     private String text;
 
     @JsonProperty("query_id")
-    private int queryId;
+    private String queryId;
 
     //bank MFO
     //Мижозга хизмат курсатувчи банк коди

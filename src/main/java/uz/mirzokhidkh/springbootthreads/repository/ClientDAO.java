@@ -1,4 +1,4 @@
-package uz.mirzokhidkh.springbootthreads.service;
+package uz.mirzokhidkh.springbootthreads.repository;
 
 import uz.mirzokhidkh.springbootthreads.domain.Client;
 import uz.mirzokhidkh.springbootthreads.payload.ApiResponse;
@@ -9,7 +9,7 @@ import uz.mirzokhidkh.springbootthreads.payload.ClientDTO;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface ClientService {
+public interface ClientDAO {
 
     List<Client> getAllClients() throws SQLException;
 

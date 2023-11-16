@@ -1,8 +1,7 @@
 package uz.mirzokhidkh.springbootthreads.component;
 
 import uz.mirzokhidkh.springbootthreads.payload.ClientBalanceDTO;
-import uz.mirzokhidkh.springbootthreads.service.ClientService;
-import uz.mirzokhidkh.springbootthreads.util.Util;
+import uz.mirzokhidkh.springbootthreads.repository.ClientDAO;
 
 //@Data
 //@Component
@@ -12,11 +11,11 @@ public class MyRunnableTask implements Runnable {
     //    private final Integer id;
 //    private final Integer balance;
     private final ClientBalanceDTO clientBalanceDTO;
-    private final ClientService clientService;
+    private final ClientDAO clientDao;
 
-    public MyRunnableTask(ClientBalanceDTO clientBalanceDTO, ClientService clientService) {
+    public MyRunnableTask(ClientBalanceDTO clientBalanceDTO, ClientDAO clientDao) {
         this.clientBalanceDTO = clientBalanceDTO;
-        this.clientService = clientService;
+        this.clientDao = clientDao;
     }
 
 //    public MyRunnableTask(ClientService clientService,Integer id, Integer balance) {
@@ -31,7 +30,7 @@ public class MyRunnableTask implements Runnable {
 //        System.out.println("MyRunnableTask is running..." + Thread.currentThread().getName());
 
 //        ClientBalanceDTO clientBalanceDTO = new ClientBalanceDTO(id, balance);
-        clientService.updateClientBalance(clientBalanceDTO);
+        clientDao.updateClientBalance(clientBalanceDTO);
 //        String threadName = Thread.currentThread().getName();
 
 

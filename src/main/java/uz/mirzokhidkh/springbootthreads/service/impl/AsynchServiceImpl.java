@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import uz.mirzokhidkh.springbootthreads.component.MyRunnableTask;
 import uz.mirzokhidkh.springbootthreads.payload.ClientBalanceDTO;
 import uz.mirzokhidkh.springbootthreads.service.AsynchService;
-import uz.mirzokhidkh.springbootthreads.service.ClientService;
+import uz.mirzokhidkh.springbootthreads.repository.ClientDAO;
 
 import java.util.List;
 
 @Service
 public class AsynchServiceImpl implements AsynchService {
 
-    private final ClientService clientService;
+    private final ClientDAO clientDao;
 
     //    @Autowired
     private final ApplicationContext appContext;
@@ -24,11 +24,11 @@ public class AsynchServiceImpl implements AsynchService {
     private final TaskExecutor taskExecutor;
 
     public AsynchServiceImpl(
-            ClientService clientService,
+            ClientDAO clientDao,
             ApplicationContext appContext,
             @Qualifier("threadPoolTaskExecutor") TaskExecutor taskExecutor
     ) {
-        this.clientService = clientService;
+        this.clientDao = clientDao;
         this.appContext = appContext;
         this.taskExecutor = taskExecutor;
     }
@@ -36,13 +36,13 @@ public class AsynchServiceImpl implements AsynchService {
 
     public void executeAsynchronously(Integer balance) {
 
-        List<Integer> allIDs = clientService.getAllIntegers();
+        List<Integer> allIDs = clientDao.getAllIntegers();
         System.out.println("DATA SIZE = " + allIDs.size());
 //        List<List<Integer>> lists = Lists.partition(allIDs, 500);
 
         allIDs.forEach(id -> {
             ClientBalanceDTO clientBalanceDTO = new ClientBalanceDTO(id, balance);
-            MyRunnableTask task = new MyRunnableTask(clientBalanceDTO, clientService);
+            MyRunnableTask task = new MyRunnableTask(clientBalanceDTO, clientDao);
             taskExecutor.execute(task);
         });
 

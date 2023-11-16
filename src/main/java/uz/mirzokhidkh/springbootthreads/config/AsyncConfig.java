@@ -7,10 +7,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.AgroResponse;
-import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.GotNewOrganization;
-import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.NewOrganization;
-import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.Transaction;
+import uz.mirzokhidkh.springbootthreads.payload.ApiResponse;
+import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.*;
+import uz.mirzokhidkh.springbootthreads.repository.AgroClientDAOImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,8 +28,11 @@ public class AsyncConfig {
 
     private final WebClient webClient;
 
-    public AsyncConfig(WebClient webClient) {
+    private final AgroClientDAOImpl agroClientDAO;
+
+    public AsyncConfig(WebClient webClient, AgroClientDAOImpl agroClientDAO) {
         this.webClient = webClient;
+        this.agroClientDAO = agroClientDAO;
     }
 
     /**
@@ -53,54 +55,90 @@ public class AsyncConfig {
 //        System.out.println("Fixed delay task - " + System.currentTimeMillis());
 //        System.out.println(new Date());
 //    System.out.println("Started : " + ++i);
-//    Thread.sleep(3000);
+//    Thread.sleep(10000);
 //    System.out.println("Finished : " + i);
 
         String urlGetNewOrg = "http://localhost:8243/api/company/get-new-organization/";
         String urlGotNewOrg = "http://localhost:8243/api/company/got-new-organization/";
 
-        NewOrganization newOrganization = webClient.get()
-                .uri(urlGetNewOrg)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer AGRO-TEST-1")
-                .retrieve()
-                .bodyToMono(NewOrganization.class)
-                .block();
 
-        System.out.println(newOrganization);
+        NewOrganization newOrganization;
+        int code;
+        String text;
 
-        int code = newOrganization.getCode();
-        String text = newOrganization.getText();
-//        if (code != 0 && text == null) {
-        if (text == null) {
-            int queryId = newOrganization.getQueryId();
-            GotNewOrganization gotNewOrganization = new GotNewOrganization(queryId);
+//        boolean isHasNew = true;
+        while (true) {
 
-            AgroResponse agroResponse1 = webClient.method(HttpMethod.GET)
-                    .uri(urlGotNewOrg)
-                    .bodyValue(gotNewOrganization)
-                    .header(HttpHeaders.AUTHORIZATION, "Bearer AGRO-TEST-2")
+            newOrganization = webClient.get()
+                    .uri(urlGetNewOrg)
+                    .header(HttpHeaders.AUTHORIZATION, "Bearer AGRO-TEST-1")
                     .retrieve()
-                    .bodyToMono(AgroResponse.class)
+                    .bodyToMono(NewOrganization.class)
                     .block();
 
-            System.out.println(agroResponse1);
+            System.out.println("1-URL => " + newOrganization);
+
+            AgroLogModel agroLogModel1 = new AgroLogModel();
+            agroLogModel1.setMethodName("method-1");
+            agroLogModel1.setStatusCode(200);
+            agroLogModel1.setMsg("Msg");
+            agroLogModel1.setRequestV("");
+            agroLogModel1.setResponseV(newOrganization.toString());
+
+            ApiResponse savedLog1 = agroClientDAO.saveLog(agroLogModel1);
+            System.out.println("LOG-1 => "+savedLog1);
+
+            code = newOrganization.getCode();
+            text = newOrganization.getText();
+
+            //        if (code != 0 && text == null) {
+            if (text == null) {
+
+                ApiResponse apiResponse = agroClientDAO.saveClient(newOrganization);
+                System.out.println(apiResponse);
+
+                String queryId = newOrganization.getQueryId();
+                GotNewOrganization gotNewOrganization = new GotNewOrganization(queryId);
+
+                AgroResponse agroResponse1 = webClient.method(HttpMethod.GET)
+                        .uri(urlGotNewOrg)
+                        .bodyValue(gotNewOrganization)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer AGRO-TEST-2")
+                        .retrieve()
+                        .bodyToMono(AgroResponse.class)
+                        .block();
+
+                System.out.println("2-URL => " + agroResponse1);
+
+
+                AgroLogModel agroLogModel2 = new AgroLogModel();
+                agroLogModel2.setMethodName("method-2");
+                agroLogModel2.setStatusCode(200);
+                agroLogModel2.setMsg("Msg");
+                agroLogModel2.setRequestV(gotNewOrganization.toString());
+                agroLogModel2.setResponseV(agroResponse1.toString());
+
+                ApiResponse savedLog2 = agroClientDAO.saveLog(agroLogModel2);
+                System.out.println("LOG-2 => "+savedLog2);
+
+            } else {
+//                isHasNew = false/;
+                break;
+            }
         }
 
-
 //        System.out.println(Thread.currentThread().getName());
-
 
     }
 
     //<second> <minute> <hour> <day-of-month> <month> <day-of-week>
-    @Scheduled(cron = "0 0/5 * * * MON-FRI") //Every 5 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
+    @Scheduled(cron = "0 0/3 * * * MON-FRI") //Every 5 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "0/10 * * * * MON-FRI") //Every 5 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
     public void scheduleCheckNewTransaction() throws InterruptedException {
         Date date = new Date();
         log.info("The time is now {}", dateFormat.format(date));
 
         String urlTransaction = "http://localhost:8243/api/company/transaction/";
-
 
         Transaction transaction = getTransaction();
         AgroResponse agroResponse2 = webClient.method(HttpMethod.GET)
@@ -114,8 +152,6 @@ public class AsyncConfig {
 
 
 //        System.out.println(Thread.currentThread().getName());
-
-
     }
 
     private static Transaction getTransaction() {

@@ -1,4 +1,4 @@
-package uz.mirzokhidkh.springbootthreads.service.impl;
+package uz.mirzokhidkh.springbootthreads.repository;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,6 @@ import uz.mirzokhidkh.springbootthreads.payload.ClientBalanceDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientStateDTO;
 //import uz.mirzokhidkh.springbootthreads.repository.ClientRepository;
-import uz.mirzokhidkh.springbootthreads.service.ClientService;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -16,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClientServiceImpl implements ClientService {
+public class ClientDAOImpl implements ClientDAO {
 
     private final DataSource dataSource;
 //    private final ClientRepository clientRepository;
 
-    public ClientServiceImpl(DataSource dataSource
+    public ClientDAOImpl(DataSource dataSource
     ) {
         this.dataSource = dataSource;
     }
@@ -183,9 +182,7 @@ public class ClientServiceImpl implements ClientService {
 //            int o_code = cs.getInt("o_code");
             String o_msg = cs.getString(1);
 //            int o_code = cs.getInt(4);
-
             return new ApiResponse(o_msg, 1);
-
         } catch (Exception e) {
             return new ApiResponse(e.getMessage(), 0);
         }
