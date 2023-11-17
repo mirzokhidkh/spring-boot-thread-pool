@@ -1,5 +1,7 @@
 package uz.mirzokhidkh.springbootthreads.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -30,9 +32,12 @@ public class AsyncConfig {
 
     private final AgroClientDAOImpl agroClientDAO;
 
-    public AsyncConfig(WebClient webClient, AgroClientDAOImpl agroClientDAO) {
+    private final ObjectMapper objectMapper;
+
+    public AsyncConfig(WebClient webClient, AgroClientDAOImpl agroClientDAO, ObjectMapper objectMapper) {
         this.webClient = webClient;
         this.agroClientDAO = agroClientDAO;
+        this.objectMapper = objectMapper;
     }
 
     /**
@@ -47,7 +52,7 @@ public class AsyncConfig {
 //    @Scheduled(cron = "0 * 9-17 * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
     @Scheduled(cron = "0/5 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "${cron.expression}")
-    public void scheduleGetNewTransaction() throws InterruptedException {
+    public void scheduleGetNewTransaction() throws InterruptedException, JsonProcessingException {
         Date date = new Date();
         log.info("The time is now {}", dateFormat.format(date));
 
@@ -83,10 +88,12 @@ public class AsyncConfig {
             agroLogModel1.setStatusCode(200);
             agroLogModel1.setMsg("Msg");
             agroLogModel1.setRequestV("");
-            agroLogModel1.setResponseV(newOrganization.toString());
 
-            ApiResponse savedLog1 = agroClientDAO.saveLog(agroLogModel1);
-            System.out.println("LOG-1 => "+savedLog1);
+            String valueAsString = objectMapper.writeValueAsString(newOrganization);
+            agroLogModel1.setResponseV(valueAsString);
+
+            agroClientDAO.saveLog(agroLogModel1);
+            System.out.println("LOG-1");
 
             code = newOrganization.getCode();
             text = newOrganization.getText();
@@ -115,11 +122,13 @@ public class AsyncConfig {
                 agroLogModel2.setMethodName("method-2");
                 agroLogModel2.setStatusCode(200);
                 agroLogModel2.setMsg("Msg");
-                agroLogModel2.setRequestV(gotNewOrganization.toString());
-                agroLogModel2.setResponseV(agroResponse1.toString());
+                valueAsString = objectMapper.writeValueAsString(gotNewOrganization);
+                agroLogModel2.setRequestV(valueAsString);
+                valueAsString = objectMapper.writeValueAsString(agroResponse1);
+                agroLogModel2.setResponseV(valueAsString);
 
-                ApiResponse savedLog2 = agroClientDAO.saveLog(agroLogModel2);
-                System.out.println("LOG-2 => "+savedLog2);
+                agroClientDAO.saveLog(agroLogModel2);
+                System.out.println("LOG-2");
 
             } else {
 //                isHasNew = false/;
