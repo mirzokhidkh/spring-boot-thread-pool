@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AgroClientDAOImpl  {
+public class AgroClientDAOImpl {
 
     private final DataSource dataSource;
 //    private final ClientRepository clientRepository;
@@ -53,7 +53,11 @@ public class AgroClientDAOImpl  {
             cs.setString(5, newOrganization.getClient());
             cs.setDate(6, Date.valueOf(newOrganization.getDialD()));
             cs.setInt(7, newOrganization.getDialNum());
-            cs.setString(8, newOrganization.getOfferAgreementFileUrl());
+
+            String offerAgreementFileUrl = newOrganization.getOfferAgreementFileUrl();
+//            if (offerAgreementFileUrl != null)
+            cs.setString(8, offerAgreementFileUrl != null ? offerAgreementFileUrl : "");
+
             cs.registerOutParameter(9, Types.VARCHAR);
             cs.registerOutParameter(10, Types.INTEGER);
             cs.execute();
@@ -69,16 +73,16 @@ public class AgroClientDAOImpl  {
 
     }
 
-//                     i_method_name agro_logs.method_name%TYPE,
+    //                     i_method_name agro_logs.method_name%TYPE,
 //                     i_status_code agro_logs.status_code%TYPE,
 //                     i_msg         agro_logs.msg%TYPE,
 //                     i_request_v   agro_logs.request_v%TYPE,
 //                     i_response_v  agro_logs.response_v%TYPE,
 //                     o_msg         OUT VARCHAR2,
 //                     o_code        OUT NUMBER
-    public ApiResponse saveLog(AgroLogModel agroLogModel) {
+    public void saveLog(AgroLogModel agroLogModel) {
 
-        String runSP = "{call AGRO_PLAT_API.Save_Log(?,?,?,?,?,?,?)}";
+        String runSP = "{call AGRO_PLAT_API.Save_Log(?,?,?,?,?)}";
         try (Connection conn = dataSource.getConnection();
              CallableStatement cs = conn.prepareCall(runSP);) {
             conn.setAutoCommit(true);
@@ -88,17 +92,11 @@ public class AgroClientDAOImpl  {
             cs.setString(3, agroLogModel.getMsg());
             cs.setString(4, agroLogModel.getRequestV());
             cs.setString(5, agroLogModel.getResponseV());
-            cs.registerOutParameter(6, Types.VARCHAR);
-            cs.registerOutParameter(7, Types.INTEGER);
             cs.execute();
 
-            String o_msg = cs.getString(6);
-            int o_code = cs.getInt(7);
-
-            return new ApiResponse(o_msg, o_code);
 
         } catch (Exception e) {
-            return new ApiResponse(e.getMessage(), 0);
+            e.printStackTrace();
         }
 
     }

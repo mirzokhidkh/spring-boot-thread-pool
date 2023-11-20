@@ -4,11 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import uz.mirzokhidkh.springbootthreads.payload.ApiResponse;
 import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.*;
 import uz.mirzokhidkh.springbootthreads.repository.AgroClientDAOImpl;
@@ -33,6 +35,9 @@ public class AsyncConfig {
     private final AgroClientDAOImpl agroClientDAO;
 
     private final ObjectMapper objectMapper;
+
+    @Value("${agro.token}")
+    private String agroToken;
 
     public AsyncConfig(WebClient webClient, AgroClientDAOImpl agroClientDAO, ObjectMapper objectMapper) {
         this.webClient = webClient;
@@ -67,33 +72,56 @@ public class AsyncConfig {
         String urlGotNewOrg = "http://localhost:8243/api/company/got-new-organization/";
 
 
-        NewOrganization newOrganization;
+        NewOrganization newOrganization = null;
         int code;
         String text;
 
 //        boolean isHasNew = true;
+        AgroLogModel agroLogModel1 = new AgroLogModel();
+        agroLogModel1.setMethodName("method-1");
+        agroLogModel1.setMsg("Msg");
+        agroLogModel1.setRequestV("");
         while (true) {
 
+//            try {
             newOrganization = webClient.get()
                     .uri(urlGetNewOrg)
-                    .header(HttpHeaders.AUTHORIZATION, "Bearer AGRO-TEST-1")
+                    .header(HttpHeaders.AUTHORIZATION, "Token AGRO-TEST-1 " + agroToken)
                     .retrieve()
+//                    .onStatus(httpStatus -> !httpStatus.is2xxSuccessful(), response -> {
+//                        agroLogModel1.setStatusCode(response.rawStatusCode());
+//                        return response.createException();
+//                    })
                     .bodyToMono(NewOrganization.class)
                     .block();
 
+//            } catch (WebClientException e) {
+//                log.info(e.getMessage());
+//                //'WebClientResponseException' exceptioni statusCode 4xx yoki 5xx holatda qaytadi
+//                if (e instanceof WebClientResponseException) {
+//                    WebClientResponseException clientEx = (WebClientResponseException) e;
+//                    agroLogModel1.setStatusCode(clientEx.getRawStatusCode());
+//                    agroLogModel1.setResponseV(clientEx.getResponseBodyAsString());
+//                } else {
+//                    agroLogModel1.setStatusCode(-1);
+//                    agroLogModel1.setResponseV(e.getMessage());
+//                }
+//                agroClientDAO.saveLog(agroLogModel1);
+//                System.out.println("LOG-1");
+//            }
+
+
+//            if (newOrganization != null) {
+
             System.out.println("1-URL => " + newOrganization);
 
-            AgroLogModel agroLogModel1 = new AgroLogModel();
-            agroLogModel1.setMethodName("method-1");
-            agroLogModel1.setStatusCode(200);
-            agroLogModel1.setMsg("Msg");
-            agroLogModel1.setRequestV("");
 
             String valueAsString = objectMapper.writeValueAsString(newOrganization);
             agroLogModel1.setResponseV(valueAsString);
 
+            agroLogModel1.setStatusCode(200);
             agroClientDAO.saveLog(agroLogModel1);
-            System.out.println("LOG-1");
+            System.out.println("LOG-1 ");
 
             code = newOrganization.getCode();
             text = newOrganization.getText();
@@ -102,40 +130,53 @@ public class AsyncConfig {
             if (text == null) {
 
                 ApiResponse apiResponse = agroClientDAO.saveClient(newOrganization);
+                int codeSavedNewOrg = apiResponse.getCode();
                 System.out.println(apiResponse);
 
                 String queryId = newOrganization.getQueryId();
                 GotNewOrganization gotNewOrganization = new GotNewOrganization(queryId);
 
-                AgroResponse agroResponse1 = webClient.method(HttpMethod.GET)
-                        .uri(urlGotNewOrg)
-                        .bodyValue(gotNewOrganization)
-                        .header(HttpHeaders.AUTHORIZATION, "Bearer AGRO-TEST-2")
-                        .retrieve()
-                        .bodyToMono(AgroResponse.class)
-                        .block();
 
-                System.out.println("2-URL => " + agroResponse1);
+                // code = 1 bo'lgandagina yangi tashkilot olinganligi haqida ma'lumot yuboriladi
+                if (codeSavedNewOrg == 1) {
+                    AgroResponse agroResponse1 = webClient.post()
+                            .uri(urlGotNewOrg)
+                            .bodyValue(gotNewOrganization)
+                            .header(HttpHeaders.AUTHORIZATION, "Token AGRO-TEST-2 " + agroToken)
+                            .retrieve()
+                            .bodyToMono(AgroResponse.class)
+                            .block();
+
+                    System.out.println("2-URL => " + agroResponse1);
 
 
-                AgroLogModel agroLogModel2 = new AgroLogModel();
-                agroLogModel2.setMethodName("method-2");
-                agroLogModel2.setStatusCode(200);
-                agroLogModel2.setMsg("Msg");
-                valueAsString = objectMapper.writeValueAsString(gotNewOrganization);
-                agroLogModel2.setRequestV(valueAsString);
-                valueAsString = objectMapper.writeValueAsString(agroResponse1);
-                agroLogModel2.setResponseV(valueAsString);
+                    AgroLogModel agroLogModel2 = new AgroLogModel();
+                    agroLogModel2.setMethodName("method-2");
+                    agroLogModel2.setStatusCode(200);
+                    agroLogModel2.setMsg("OK");
+                    valueAsString = objectMapper.writeValueAsString(gotNewOrganization);
+                    agroLogModel2.setRequestV(valueAsString);
+                    valueAsString = objectMapper.writeValueAsString(agroResponse1);
+                    agroLogModel2.setResponseV(valueAsString);
 
-                agroClientDAO.saveLog(agroLogModel2);
-                System.out.println("LOG-2");
+                    agroClientDAO.saveLog(agroLogModel2);
+                    System.out.println("LOG-2");
+                } else {
+                    break;
+                }
+                System.out.println("---------------------------------------");
 
             } else {
 //                isHasNew = false/;
                 break;
             }
+//            } else {
+//                break;
+//            }
+
         }
 
+        System.out.println("=============================================");
 //        System.out.println(Thread.currentThread().getName());
 
     }
@@ -150,10 +191,10 @@ public class AsyncConfig {
         String urlTransaction = "http://localhost:8243/api/company/transaction/";
 
         Transaction transaction = getTransaction();
-        AgroResponse agroResponse2 = webClient.method(HttpMethod.GET)
+        AgroResponse agroResponse2 = webClient.post()
                 .uri(urlTransaction)
                 .bodyValue(transaction)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer AGRO-TEST-3")
+                .header(HttpHeaders.AUTHORIZATION, "Token AGRO-TEST-3 " + agroToken)
                 .retrieve()
                 .bodyToMono(AgroResponse.class)
                 .block();
