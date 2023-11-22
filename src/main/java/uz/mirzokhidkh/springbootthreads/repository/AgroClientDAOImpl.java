@@ -46,7 +46,7 @@ public class AgroClientDAOImpl {
              CallableStatement cs = conn.prepareCall(runSP);) {
             conn.setAutoCommit(true);
 
-            cs.setString(1, newOrganization.getQueryId());
+            cs.setInt(1, newOrganization.getQueryId());
             cs.setDate(2, Date.valueOf(newOrganization.getQueryDate()));
             cs.setString(3, newOrganization.getInn());
             cs.setString(4, newOrganization.getClientBranch());
@@ -94,9 +94,29 @@ public class AgroClientDAOImpl {
             cs.setString(5, agroLogModel.getResponseV());
             cs.execute();
 
-
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public ApiResponse updateClientApprovedState(int queryId) {
+
+        String runSP = "{call AGRO_PLAT_API.Update_Cl_Approved(?,?,?)}";
+        try (Connection conn = dataSource.getConnection();
+             CallableStatement cs = conn.prepareCall(runSP);) {
+            conn.setAutoCommit(true);
+            cs.setInt(1, queryId);
+            cs.registerOutParameter(2, Types.VARCHAR);
+            cs.registerOutParameter(3, Types.INTEGER);
+            cs.execute();
+
+            String o_msg = cs.getString(2);
+            int o_code = cs.getInt(3);
+
+            return new ApiResponse(o_msg, o_code);
+        } catch (Exception e) {
+            return new ApiResponse(e.getMessage(), 0);
         }
 
     }

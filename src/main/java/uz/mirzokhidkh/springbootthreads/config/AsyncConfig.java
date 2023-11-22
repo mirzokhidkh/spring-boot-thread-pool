@@ -55,7 +55,7 @@ public class AsyncConfig {
 //    @Scheduled(fixedRate = 1000)
     //<second> <minute> <hour> <day-of-month> <month> <day-of-week>
 //    @Scheduled(cron = "0 * 9-17 * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
-    @Scheduled(cron = "0/5 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
+    @Scheduled(cron = "0/10 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "${cron.expression}")
     public void scheduleGetNewTransaction() throws InterruptedException, JsonProcessingException {
         Date date = new Date();
@@ -133,7 +133,7 @@ public class AsyncConfig {
                 int codeSavedNewOrg = apiResponse.getCode();
                 System.out.println(apiResponse);
 
-                String queryId = newOrganization.getQueryId();
+                int queryId = newOrganization.getQueryId();
                 GotNewOrganization gotNewOrganization = new GotNewOrganization(queryId);
 
 
@@ -149,7 +149,12 @@ public class AsyncConfig {
 
                     System.out.println("2-URL => " + agroResponse1);
 
-
+                    int code2 = agroResponse1.getCode();
+                    if (code2 == 1) {
+//                        ApiResponse apiResponse1 = agroClientDAO.updateClientApprovedState(1);
+                        ApiResponse apiResponse1 = agroClientDAO.updateClientApprovedState(queryId);
+                        System.out.println("Approve :"+apiResponse1);
+                    }
                     AgroLogModel agroLogModel2 = new AgroLogModel();
                     agroLogModel2.setMethodName("method-2");
                     agroLogModel2.setStatusCode(200);

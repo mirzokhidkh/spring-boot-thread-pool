@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class GotNewOrganization {
 
 	@JsonProperty("query_id")
-	private String queryId;
+	private int queryId;
 
 
 }
