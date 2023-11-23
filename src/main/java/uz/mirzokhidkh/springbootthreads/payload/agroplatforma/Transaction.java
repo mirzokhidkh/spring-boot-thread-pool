@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 
 @Data
 @AllArgsConstructor
@@ -54,11 +56,11 @@ public class Transaction{
 
 	//To’lov o’tkazilgan sana
 	@JsonProperty("v_date")
-	private String vDate;
+	private Date vDate;
 
 	//To’lov summasi
 	@JsonProperty("summa")
-	private int summa;
+	private Long summa;
 
 	//Mijoz unikal bank kodi
 	@JsonProperty("client")
@@ -74,7 +76,7 @@ public class Transaction{
 
 	//to’lov idsi
 	@JsonProperty("id")
-	private int id;
+	private Long id;
 
 	//To’lovchi yuridik shaxs nomi
 	@JsonProperty("name_cl")

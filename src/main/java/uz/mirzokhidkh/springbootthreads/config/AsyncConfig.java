@@ -9,12 +9,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientException;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 import uz.mirzokhidkh.springbootthreads.payload.ApiResponse;
 import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.*;
 import uz.mirzokhidkh.springbootthreads.repository.AgroClientDAOImpl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -55,7 +54,7 @@ public class AsyncConfig {
 //    @Scheduled(fixedRate = 1000)
     //<second> <minute> <hour> <day-of-month> <month> <day-of-week>
 //    @Scheduled(cron = "0 * 9-17 * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
-    @Scheduled(cron = "0/10 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
+    @Scheduled(cron = "0 * 1 * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "${cron.expression}")
     public void scheduleGetNewTransaction() throws InterruptedException, JsonProcessingException {
         Date date = new Date();
@@ -153,7 +152,7 @@ public class AsyncConfig {
                     if (code2 == 1) {
 //                        ApiResponse apiResponse1 = agroClientDAO.updateClientApprovedState(1);
                         ApiResponse apiResponse1 = agroClientDAO.updateClientApprovedState(queryId);
-                        System.out.println("Approve :"+apiResponse1);
+                        System.out.println("Approve :" + apiResponse1);
                     }
                     AgroLogModel agroLogModel2 = new AgroLogModel();
                     agroLogModel2.setMethodName("method-2");
@@ -187,29 +186,42 @@ public class AsyncConfig {
     }
 
     //<second> <minute> <hour> <day-of-month> <month> <day-of-week>
-    @Scheduled(cron = "0 0/3 * * * MON-FRI") //Every 5 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
-//    @Scheduled(cron = "0/10 * * * * MON-FRI") //Every 5 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
-    public void scheduleCheckNewTransaction() throws InterruptedException {
+    @Scheduled(cron = "0/5 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
+//    @Scheduled(cron = "0 0/3 * * * MON-FRI") //Every 3 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
+//    @Scheduled(cron = "0/10 * * * * MON-FRI") //Every 10 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
+    public void scheduleCheckNewTransaction() throws InterruptedException, ParseException {
         Date date = new Date();
         log.info("The time is now {}", dateFormat.format(date));
 
         String urlTransaction = "http://localhost:8243/api/company/transaction/";
 
-        Transaction transaction = getTransaction();
-        AgroResponse agroResponse2 = webClient.post()
-                .uri(urlTransaction)
-                .bodyValue(transaction)
-                .header(HttpHeaders.AUTHORIZATION, "Token AGRO-TEST-3 " + agroToken)
-                .retrieve()
-                .bodyToMono(AgroResponse.class)
-                .block();
-        System.out.println(agroResponse2);
+        agroClientDAO.getActiveAgroTransactions().forEach(transaction -> {
+
+//            Transaction transaction = getTransaction();
+            AgroResponse agroResponse2 = webClient.post()
+                    .uri(urlTransaction)
+                    .bodyValue(transaction)
+                    .header(HttpHeaders.AUTHORIZATION, "Token AGRO-TEST-3 " + agroToken)
+                    .retrieve()
+                    .bodyToMono(AgroResponse.class)
+                    .block();
+
+            System.out.println(agroResponse2);
+
+            int code = agroResponse2.getCode();
+
+            if (code == 1) {
+                agroClientDAO.moveTransactionToHistory(transaction.getId());
+            }
+
+
+        });
 
 
 //        System.out.println(Thread.currentThread().getName());
     }
 
-    private static Transaction getTransaction() {
+    private static Transaction getTransaction() throws ParseException {
         Transaction transaction = new Transaction();
         transaction.setDocNum(22);
         transaction.setDDate("2023-11-11");
@@ -222,12 +234,16 @@ public class AsyncConfig {
         transaction.setNameCo("Str");
         transaction.setPurpose("йил апрель ойи иш хакидан касаба уюшма аъзолик бадали утказилди");
         transaction.setPurposeCode("Str");
-        transaction.setSumma(1000000);
+        transaction.setSumma(1000000L);
         transaction.setCurrency("Str");
         transaction.setTypeDoc(122);
-        transaction.setVDate("2023-05-23");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = dateFormat.parse("2023-05-23");
+
+        transaction.setVDate(date);
         transaction.setPdc("D");
-        transaction.setId(33);
+        transaction.setId(33L);
         return transaction;
     }
 

@@ -9,6 +9,7 @@ import uz.mirzokhidkh.springbootthreads.payload.ClientDTO;
 import uz.mirzokhidkh.springbootthreads.payload.ClientStateDTO;
 import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.AgroLogModel;
 import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.NewOrganization;
+import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.Transaction;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -118,7 +119,66 @@ public class AgroClientDAOImpl {
         } catch (Exception e) {
             return new ApiResponse(e.getMessage(), 0);
         }
+    }
 
+
+    public List<Transaction> getActiveAgroTransactions() {
+        List<Transaction> list = new ArrayList<>();
+
+        String QUERY = "select t.* from agro_leads t";
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()
+        ) {
+            ResultSet rs = stmt.executeQuery(QUERY);
+            Transaction transaction = new Transaction();
+            while (rs.next()) {
+                int opDc = rs.getInt("op_dc");
+
+                transaction.setDocNum(Integer.parseInt(rs.getString("doc_numb")));
+                transaction.setDDate(rs.getString("doc_date"));
+                transaction.setBankCl(rs.getString("cl_mfo"));
+
+                String client = null;
+                if (opDc == 1) {
+                    client = rs.getString("cl_acc");
+                } else {
+                    client = rs.getString("co_acc");
+                }
+                transaction.setClient(client.substring(7));
+                transaction.setAccCl(rs.getNString("cl_acc"));
+                transaction.setNameCl(rs.getString("cl_name"));
+                transaction.setAccCo(rs.getString("co_acc"));
+                transaction.setBankCo(rs.getString("co_mfo"));
+                transaction.setNameCo(rs.getString("co_name"));
+                transaction.setPurpose(rs.getString("pay_purpose"));
+                transaction.setPurposeCode(rs.getString("sym_id"));
+                transaction.setSumma(rs.getLong("sum_pay"));
+                transaction.setCurrency(rs.getString("code_currency"));
+                transaction.setTypeDoc(rs.getInt("trans_id"));
+                transaction.setVDate(rs.getDate("curr_day"));
+                transaction.setPdc(opDc == 1 ? "D" : "C");
+                transaction.setId(rs.getLong("id"));
+
+                list.add(transaction);
+            }
+
+            return list;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void moveTransactionToHistory(Long leadId) {
+
+        String runSP = "{call AGRO_PLAT_API.Move_Trans_To_Archive(?)}";
+        try (Connection conn = dataSource.getConnection();
+             CallableStatement cs = conn.prepareCall(runSP);) {
+            conn.setAutoCommit(true);
+            cs.setLong(1, leadId);
+            cs.execute();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
 
