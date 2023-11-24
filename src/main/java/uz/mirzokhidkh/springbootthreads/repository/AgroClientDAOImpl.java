@@ -13,6 +13,7 @@ import uz.mirzokhidkh.springbootthreads.payload.agroplatforma.Transaction;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,42 +126,50 @@ public class AgroClientDAOImpl {
     public List<Transaction> getActiveAgroTransactions() {
         List<Transaction> list = new ArrayList<>();
 
-        String QUERY = "select t.* from agro_leads t";
+        String QUERY = "select t.* from agro_leads_v t";
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement()
         ) {
             ResultSet rs = stmt.executeQuery(QUERY);
-            Transaction transaction = new Transaction();
+            Transaction transaction ;
             while (rs.next()) {
+                transaction = new Transaction();
+
                 int opDc = rs.getInt("op_dc");
 
                 transaction.setDocNum(Integer.parseInt(rs.getString("doc_numb")));
-                transaction.setDDate(rs.getString("doc_date"));
+                transaction.setDDate(rs.getDate("doc_date"));
                 transaction.setBankCl(rs.getString("cl_mfo"));
 
-                String client = null;
-                if (opDc == 1) {
-                    client = rs.getString("cl_acc");
-                } else {
-                    client = rs.getString("co_acc");
-                }
-                transaction.setClient(client.substring(7));
-                transaction.setAccCl(rs.getNString("cl_acc"));
+//                String client = null;
+//                if (opDc == 1) {
+//                    client = rs.getString("cl_acc");
+//                } else {
+//                    client = rs.getString("co_acc");
+//                }
+//                transaction.setClient(client.substring(7));
+                String client = rs.getString("client");
+                transaction.setClient(client.substring(9, 17));
+                String clAcc = rs.getNString("cl_acc");
+                transaction.setAccCl(clAcc.substring(7));
                 transaction.setNameCl(rs.getString("cl_name"));
-                transaction.setAccCo(rs.getString("co_acc"));
+                String coAcc = rs.getString("co_acc");
+                transaction.setAccCo(coAcc.substring(7));
                 transaction.setBankCo(rs.getString("co_mfo"));
                 transaction.setNameCo(rs.getString("co_name"));
                 transaction.setPurpose(rs.getString("pay_purpose"));
-                transaction.setPurposeCode(rs.getString("sym_id"));
+//                transaction.setPurposeCode(rs.getString("sym_id"));
                 transaction.setSumma(rs.getLong("sum_pay"));
                 transaction.setCurrency(rs.getString("code_currency"));
-                transaction.setTypeDoc(rs.getInt("trans_id"));
+                transaction.setTypeDoc(rs.getString("code_document"));
                 transaction.setVDate(rs.getDate("curr_day"));
                 transaction.setPdc(opDc == 1 ? "D" : "C");
                 transaction.setId(rs.getLong("id"));
 
                 list.add(transaction);
             }
+            rs.close();
+
 
             return list;
         } catch (SQLException ex) {

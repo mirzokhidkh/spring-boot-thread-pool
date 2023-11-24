@@ -36,11 +36,11 @@ public class Transaction{
 
 	//To’lov xujjati turi
 	@JsonProperty("type_doc")
-	private int typeDoc;
+	private String typeDoc;
 
 	//To’lov xujjati sanasi
 	@JsonProperty("d_date")
-	private String dDate;
+	private Date dDate;
 
 	//Korrespondent bank MFO
 	@JsonProperty("bank_co")
@@ -67,8 +67,8 @@ public class Transaction{
 	private String client;
 
 	//To’lov maqsadi kodi
-	@JsonProperty("purpose_code")
-	private String purposeCode;
+//	@JsonProperty("purpose_code")
+//	private String purposeCode;
 
 	//To’lov valyuta kodi
 	@JsonProperty("currency")

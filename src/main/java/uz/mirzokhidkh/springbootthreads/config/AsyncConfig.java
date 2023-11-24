@@ -16,6 +16,8 @@ import uz.mirzokhidkh.springbootthreads.repository.AgroClientDAOImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 //@Configuration
 //@EnableScheduling
@@ -189,13 +191,24 @@ public class AsyncConfig {
     @Scheduled(cron = "0/5 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "0 0/3 * * * MON-FRI") //Every 3 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "0/10 * * * * MON-FRI") //Every 10 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
-    public void scheduleCheckNewTransaction() throws InterruptedException, ParseException {
+    public void scheduleCheckNewTransaction() throws JsonProcessingException {
         Date date = new Date();
         log.info("The time is now {}", dateFormat.format(date));
 
         String urlTransaction = "http://localhost:8243/api/company/transaction/";
+        AtomicReference<String> jsonObj = new AtomicReference<>();
 
-        agroClientDAO.getActiveAgroTransactions().forEach(transaction -> {
+        List<Transaction> agroTransactions = agroClientDAO.getActiveAgroTransactions();
+         for (Transaction transaction : agroTransactions) {
+
+//        agroClientDAO.getActiveAgroTransactions().forEach(transaction -> {
+
+            try {
+                jsonObj.set(objectMapper.writeValueAsString(transaction));
+                log.info(jsonObj.get().toString());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
 
 //            Transaction transaction = getTransaction();
             AgroResponse agroResponse2 = webClient.post()
@@ -214,8 +227,27 @@ public class AsyncConfig {
                 agroClientDAO.moveTransactionToHistory(transaction.getId());
             }
 
+            AgroLogModel agroLogModel3 = new AgroLogModel();
+            agroLogModel3.setMethodName("method-3");
+            agroLogModel3.setStatusCode(200);
+            agroLogModel3.setMsg("OK");
+            String valueAsString = null;
+            try {
+                valueAsString = objectMapper.writeValueAsString(transaction);
+                agroLogModel3.setRequestV(valueAsString);
+                valueAsString = objectMapper.writeValueAsString(agroResponse2);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            agroLogModel3.setResponseV(valueAsString);
 
-        });
+            agroClientDAO.saveLog(agroLogModel3);
+
+            System.out.println("LOG-3");
+
+
+//        });
+        }
 
 
 //        System.out.println(Thread.currentThread().getName());
@@ -224,7 +256,9 @@ public class AsyncConfig {
     private static Transaction getTransaction() throws ParseException {
         Transaction transaction = new Transaction();
         transaction.setDocNum(22);
-        transaction.setDDate("2023-11-11");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = dateFormat.parse("2023-11-11");
+        transaction.setDDate(date);
         transaction.setBankCl("12345");
         transaction.setClient("11111111");
         transaction.setAccCl("12121212121212");
@@ -233,13 +267,12 @@ public class AsyncConfig {
         transaction.setAccCo("Str");
         transaction.setNameCo("Str");
         transaction.setPurpose("йил апрель ойи иш хакидан касаба уюшма аъзолик бадали утказилди");
-        transaction.setPurposeCode("Str");
+//        transaction.setPurposeCode("Str");
         transaction.setSumma(1000000L);
         transaction.setCurrency("Str");
-        transaction.setTypeDoc(122);
+        transaction.setTypeDoc("11");
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = dateFormat.parse("2023-05-23");
+        date = dateFormat.parse("2023-05-23");
 
         transaction.setVDate(date);
         transaction.setPdc("D");
