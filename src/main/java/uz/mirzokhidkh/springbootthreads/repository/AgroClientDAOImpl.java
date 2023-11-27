@@ -135,36 +135,45 @@ public class AgroClientDAOImpl {
             while (rs.next()) {
                 transaction = new Transaction();
 
-                int opDc = rs.getInt("op_dc");
-
-                transaction.setDocNum(Integer.parseInt(rs.getString("doc_numb")));
-                transaction.setDDate(rs.getDate("doc_date"));
-                transaction.setBankCl(rs.getString("cl_mfo"));
-
-//                String client = null;
-//                if (opDc == 1) {
-//                    client = rs.getString("cl_acc");
-//                } else {
-//                    client = rs.getString("co_acc");
-//                }
-//                transaction.setClient(client.substring(7));
+                String docNumb = rs.getString("doc_numb");
+                Date docDate = rs.getDate("doc_date");
+                String clMfo = rs.getString("cl_mfo");
                 String client = rs.getString("client");
-                transaction.setClient(client.substring(9, 17));
                 String clAcc = rs.getNString("cl_acc");
-                transaction.setAccCl(clAcc.substring(7));
-                transaction.setNameCl(rs.getString("cl_name"));
+                String clName = rs.getString("cl_name");
                 String coAcc = rs.getString("co_acc");
+                String coMfo = rs.getString("co_mfo");
+                String coName = rs.getString("co_name");
+                String payPurpose = rs.getString("pay_purpose");
+                long sumPay = rs.getLong("sum_pay");
+                String codeCurrency = rs.getString("code_currency");
+                String codeDocument = rs.getString("code_document");
+                Date currDay = rs.getDate("curr_day");
+                int opDc = rs.getInt("op_dc");
+                long id = rs.getLong("id");
+
+                transaction.setDocNum(Integer.parseInt(docNumb));
+                transaction.setDDate(docDate);
+                transaction.setBankCl(clMfo);
+                //client 20 talik hisob raqamidan 9-indexdan 17-indexgacha Client Code hisoblandi.
+                //masalan : '20208000004389063001'[9:17] -> 04389063
+                String clientCode = client.substring(9, 17);
+                transaction.setClient(clientCode);
+                transaction.setAccCl(clAcc.substring(7));
+                transaction.setNameCl(clName);
                 transaction.setAccCo(coAcc.substring(7));
-                transaction.setBankCo(rs.getString("co_mfo"));
-                transaction.setNameCo(rs.getString("co_name"));
-                transaction.setPurpose(rs.getString("pay_purpose"));
+                transaction.setBankCo(coMfo);
+                transaction.setNameCo(coName);
+                transaction.setPurpose(payPurpose);
 //                transaction.setPurposeCode(rs.getString("sym_id"));
-                transaction.setSumma(rs.getLong("sum_pay"));
-                transaction.setCurrency(rs.getString("code_currency"));
-                transaction.setTypeDoc(rs.getString("code_document"));
-                transaction.setVDate(rs.getDate("curr_day"));
+                transaction.setSumma(sumPay);
+                transaction.setCurrency(codeCurrency);
+                transaction.setTypeDoc(codeDocument);
+                transaction.setVDate(currDay);
+                //opDc = 1 bo'lsa 'D'(Debit) , 0 bo'lsa 'C'(Credit)
                 transaction.setPdc(opDc == 1 ? "D" : "C");
-                transaction.setId(rs.getLong("id"));
+                transaction.setId(id);
+
 
                 list.add(transaction);
             }

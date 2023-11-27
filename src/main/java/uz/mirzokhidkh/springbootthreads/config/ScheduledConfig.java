@@ -23,9 +23,9 @@ import java.util.concurrent.atomic.AtomicReference;
 //@EnableScheduling
 @Component
 //@EnableAsync
-public class AsyncConfig {
+public class ScheduledConfig {
 
-    private static final Logger log = LoggerFactory.getLogger(AsyncConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(ScheduledConfig.class);
 
     private static int i = 0;
 
@@ -40,7 +40,16 @@ public class AsyncConfig {
     @Value("${agro.token}")
     private String agroToken;
 
-    public AsyncConfig(WebClient webClient, AgroClientDAOImpl agroClientDAO, ObjectMapper objectMapper) {
+    @Value("${agro.url.get-new-org}")
+    private String urlGetNewOrg;
+
+    @Value("${agro.url.got-new-org}")
+    private String urlGotNewOrg;
+
+    @Value("${agro.url.send-trans}")
+    private String urlSendTransaction;
+
+    public ScheduledConfig(WebClient webClient, AgroClientDAOImpl agroClientDAO, ObjectMapper objectMapper) {
         this.webClient = webClient;
         this.agroClientDAO = agroClientDAO;
         this.objectMapper = objectMapper;
@@ -56,7 +65,8 @@ public class AsyncConfig {
 //    @Scheduled(fixedRate = 1000)
     //<second> <minute> <hour> <day-of-month> <month> <day-of-week>
 //    @Scheduled(cron = "0 * 9-17 * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
-    @Scheduled(cron = "0 * 1 * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
+//    @Scheduled(cron = "0 * 1 * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
+    @Scheduled(cron = "0/5 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "${cron.expression}")
     public void scheduleGetNewTransaction() throws InterruptedException, JsonProcessingException {
         Date date = new Date();
@@ -69,8 +79,8 @@ public class AsyncConfig {
 //    Thread.sleep(10000);
 //    System.out.println("Finished : " + i);
 
-        String urlGetNewOrg = "http://localhost:8243/api/company/get-new-organization/";
-        String urlGotNewOrg = "http://localhost:8243/api/company/got-new-organization/";
+//        String urlGetNewOrg = "http://localhost:8243/api/company/get-new-organization/";
+//        String urlGotNewOrg = "http://localhost:8243/api/company/got-new-organization/";
 
 
         NewOrganization newOrganization = null;
@@ -195,7 +205,7 @@ public class AsyncConfig {
         Date date = new Date();
         log.info("The time is now {}", dateFormat.format(date));
 
-        String urlTransaction = "http://localhost:8243/api/company/transaction/";
+//        String urlSendTransaction = "http://localhost:8243/api/company/transaction/";
         AtomicReference<String> jsonObj = new AtomicReference<>();
 
         List<Transaction> agroTransactions = agroClientDAO.getActiveAgroTransactions();
@@ -212,7 +222,7 @@ public class AsyncConfig {
 
 //            Transaction transaction = getTransaction();
             AgroResponse agroResponse2 = webClient.post()
-                    .uri(urlTransaction)
+                    .uri(urlSendTransaction)
                     .bodyValue(transaction)
                     .header(HttpHeaders.AUTHORIZATION, "Token AGRO-TEST-3 " + agroToken)
                     .retrieve()
