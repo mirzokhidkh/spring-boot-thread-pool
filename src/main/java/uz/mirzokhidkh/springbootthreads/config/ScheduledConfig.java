@@ -198,7 +198,7 @@ public class ScheduledConfig {
     }
 
     //<second> <minute> <hour> <day-of-month> <month> <day-of-week>
-    @Scheduled(cron = "0/5 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
+    @Scheduled(cron = "0/15 * * * * MON-FRI") //Every minute, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "0 0/3 * * * MON-FRI") //Every 3 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
 //    @Scheduled(cron = "0/10 * * * * MON-FRI") //Every 10 minutes, between 09:00 AM and 05:59 PM, Monday through Friday
     public void scheduleCheckNewTransaction() throws JsonProcessingException {
@@ -209,9 +209,9 @@ public class ScheduledConfig {
         AtomicReference<String> jsonObj = new AtomicReference<>();
 
         List<Transaction> agroTransactions = agroClientDAO.getActiveAgroTransactions();
-         for (Transaction transaction : agroTransactions) {
+//         for (Transaction transaction : agroTransactions) {
 
-//        agroClientDAO.getActiveAgroTransactions().forEach(transaction -> {
+        agroTransactions.forEach(transaction -> {
 
             try {
                 jsonObj.set(objectMapper.writeValueAsString(transaction));
@@ -219,6 +219,8 @@ public class ScheduledConfig {
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
+
+
 
 //            Transaction transaction = getTransaction();
             AgroResponse agroResponse2 = webClient.post()
@@ -256,8 +258,8 @@ public class ScheduledConfig {
             System.out.println("LOG-3");
 
 
-//        });
-        }
+        });
+//        }
 
 
 //        System.out.println(Thread.currentThread().getName());

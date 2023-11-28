@@ -16,6 +16,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AgroClientDAOImpl {
@@ -126,56 +127,62 @@ public class AgroClientDAOImpl {
     public List<Transaction> getActiveAgroTransactions() {
         List<Transaction> list = new ArrayList<>();
 
-        String QUERY = "select t.* from agro_leads_v t";
+        String QUERY = "select t.* from agro_client_leads_v t";
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement()
         ) {
             ResultSet rs = stmt.executeQuery(QUERY);
-            Transaction transaction ;
+            Transaction transaction;
             while (rs.next()) {
-                transaction = new Transaction();
 
-                String docNumb = rs.getString("doc_numb");
-                Date docDate = rs.getDate("doc_date");
-                String clMfo = rs.getString("cl_mfo");
-                String client = rs.getString("client");
-                String clAcc = rs.getNString("cl_acc");
-                String clName = rs.getString("cl_name");
-                String coAcc = rs.getString("co_acc");
-                String coMfo = rs.getString("co_mfo");
-                String coName = rs.getString("co_name");
-                String payPurpose = rs.getString("pay_purpose");
-                long sumPay = rs.getLong("sum_pay");
-                String codeCurrency = rs.getString("code_currency");
-                String codeDocument = rs.getString("code_document");
-                Date currDay = rs.getDate("curr_day");
-                int opDc = rs.getInt("op_dc");
-                long id = rs.getLong("id");
+                String consent = rs.getString("consent");
 
-                transaction.setDocNum(Integer.parseInt(docNumb));
-                transaction.setDDate(docDate);
-                transaction.setBankCl(clMfo);
-                //client 20 talik hisob raqamidan 9-indexdan 17-indexgacha Client Code hisoblandi.
-                //masalan : '20208000004389063001'[9:17] -> 04389063
-                String clientCode = client.substring(9, 17);
-                transaction.setClient(clientCode);
-                transaction.setAccCl(clAcc.substring(7));
-                transaction.setNameCl(clName);
-                transaction.setAccCo(coAcc.substring(7));
-                transaction.setBankCo(coMfo);
-                transaction.setNameCo(coName);
-                transaction.setPurpose(payPurpose);
+                //mijoz rozi bo'lsagina listga qo'shiladi
+                if (Objects.equals(consent, "Y")) {
+                    transaction = new Transaction();
+
+                    String docNumb = rs.getString("doc_numb");
+                    Date docDate = rs.getDate("doc_date");
+                    String clMfo = rs.getString("cl_mfo");
+                    String client = rs.getString("client");
+                    String clAcc = rs.getNString("cl_acc");
+                    String clName = rs.getString("cl_name");
+                    String coAcc = rs.getString("co_acc");
+                    String coMfo = rs.getString("co_mfo");
+                    String coName = rs.getString("co_name");
+                    String payPurpose = rs.getString("pay_purpose");
+                    long sumPay = rs.getLong("sum_pay");
+                    String codeCurrency = rs.getString("code_currency");
+                    String codeDocument = rs.getString("code_document");
+                    Date currDay = rs.getDate("curr_day");
+                    int opDc = rs.getInt("op_dc");
+                    long id = rs.getLong("id");
+
+                    transaction.setDocNum(Integer.parseInt(docNumb));
+                    transaction.setDDate(docDate);
+                    transaction.setBankCl(clMfo);
+                    //client 20 talik hisob raqamidan 9-indexdan 17-indexgacha Client Code hisoblandi.
+                    //masalan : '20208000004389063001'[9:17] -> 04389063
+                    String clientCode = client.substring(9, 17);
+                    transaction.setClient(clientCode);
+                    transaction.setAccCl(clAcc.substring(7));
+                    transaction.setNameCl(clName);
+                    transaction.setAccCo(coAcc.substring(7));
+                    transaction.setBankCo(coMfo);
+                    transaction.setNameCo(coName);
+                    transaction.setPurpose(payPurpose);
 //                transaction.setPurposeCode(rs.getString("sym_id"));
-                transaction.setSumma(sumPay);
-                transaction.setCurrency(codeCurrency);
-                transaction.setTypeDoc(codeDocument);
-                transaction.setVDate(currDay);
-                //opDc = 1 bo'lsa 'D'(Debit) , 0 bo'lsa 'C'(Credit)
-                transaction.setPdc(opDc == 1 ? "D" : "C");
-                transaction.setId(id);
+                    transaction.setSumma(sumPay);
+                    transaction.setCurrency(codeCurrency);
+                    transaction.setTypeDoc(codeDocument);
+                    transaction.setVDate(currDay);
+                    //opDc = 1 bo'lsa 'D'(Debit) , 0 bo'lsa 'C'(Credit)
+                    transaction.setPdc(opDc == 1 ? "D" : "C");
+                    transaction.setId(id);
 
 
-                list.add(transaction);
+                    list.add(transaction);
+                }
             }
             rs.close();
 
